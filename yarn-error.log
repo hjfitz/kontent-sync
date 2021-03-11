@@ -32,7 +32,7 @@ npm manifest:
           "kontent-sync": "bin/kontent-sync"
       },
       "scripts": {
-          "set_up": "ts-node src/helpers/kontentClients.ts",
+          "set_up": "ts-node src/helpers/kontentClients.js",
           "export_content_types": "ts-node src/migrations/exporting/exportContentTypes.js",
           "import_content_types": "ts-node src/migrations/importing/importContentTypes.js",
           "export_localisations": "ts-node src/migrations/exporting/exportLocalisations.js",

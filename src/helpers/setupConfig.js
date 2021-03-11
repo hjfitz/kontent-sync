@@ -1,8 +1,6 @@
 import fs from "fs";
 import chalk from 'chalk';
 
-const readline = require("readline-sync");
-
 const selectProjects = (importProject, exportProject) => {
 
     let kontent_config = {};
@@ -84,73 +82,4 @@ const listProjects = () => {
     return projects
 }
 
-const kontentSetup = () => {
-    console.log("");
-    console.log(`Running Kontent setup...`);
-    console.log("");
-
-    let kontent_config = {};
-    try {
-        const kontent_environments = require("../../.environments.json");
-        kontent_config = { ...kontent_environments };
-    } catch {}
-
-    if (kontent_config["EXPORT"]) {
-        console.log(kontent_config["EXPORT"]);
-
-        const continue_input = readline.question(
-            "This will overwrite Kontent config, continue? (y/n): "
-        );
-
-        if (continue_input === "n") {
-            console.log("Skipped Kontent Setup...");
-            return;
-        }
-    }
-
-    if (kontent_config["IMPORT"]) {
-        console.log(kontent_config["IMPORT"]);
-
-        const continue_input = readline.question(
-            "This will overwrite Kontent config, continue? (y/n): "
-        );
-
-        if (continue_input === "n") {
-            console.log("Skipped Kontent Setup...");
-            return;
-        }
-    }
-
-    console.log("");
-    console.log("Setup for Kontent project export");
-    console.log("");
-
-    let projectId = readline.question("Enter Kontent Project ID: ");
-    let apiKey = readline.question("Enter Kontent Management token: ");
-
-    kontent_config["EXPORT"] = {
-        projectId,
-        apiKey
-    };
-
-    console.log("");
-    console.log("Setup for Kontent project import");
-    console.log("");
-
-    projectId = readline.question("Enter Kontent Project ID: ");
-    apiKey = readline.question("Enter Kontent Management token: ");
-
-    kontent_config["IMPORT"] = {
-        projectId,
-        apiKey
-    };
-
-    fs.writeFileSync(
-        ".environments.json",
-        JSON.stringify(kontent_config, undefined, 2)
-    );
-
-    console.log("Kontent Setup complete");
-};
-
-export { selectProjects ,kontentSetup, addProject, removeProject, listProjects };
+export { selectProjects , addProject, removeProject, listProjects };
