@@ -6,9 +6,7 @@
     "bin": {
         "kontent-sync": "bin/kontent-sync"
     },
-    "scripts": {
-
-    },
+    "scripts": {},
     "keywords": [
         "cli",
         "kontent-sync"
@@ -19,10 +17,11 @@
     },
     "dependencies": {
         "@kentico/kontent-management": "^0.3.18",
-        "rxjs": "^6.5.4",
         "arg": "^5.0.0",
         "chalk": "^4.1.0",
         "esm": "^3.2.25",
-        "inquirer": "^8.0.0"
-    }
+        "inquirer": "^8.0.0",
+        "rxjs": "^6.5.4"
+    },
+    "version": "0.0.0"
 }
