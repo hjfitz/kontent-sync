@@ -2,7 +2,7 @@
     "name": "kontent-sync",
     "description": "Kontent sync tool, syncing from one project to another",
     "main": "src/cli.js",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": "https://github.com/matthewcm/kontent-sync",
     "license": "ISC",
     "bin": {
