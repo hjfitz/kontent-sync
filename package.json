@@ -1,0 +1,56 @@
+{
+    "name": "kontent-sync",
+    "description": "Kontent sync tool, syncing from one project to another",
+    "main": "src/cli.js",
+    "license": "ISC",
+    "bin": {
+        "kontent-sync": "bin/kontent-sync"
+    },
+    "scripts": {
+
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "tslint --fix --project tsconfig.json",
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "prettier": {
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 4
+    },
+    "keywords": [
+        "cli",
+        "kontent-sync"
+    ],
+    "author": "",
+    "devDependencies": {
+        "commander": "^5.0.0",
+        "dotenv": "^8.2.0",
+        "husky": "^3.1.0",
+        "jest": "^25.1.0",
+        "lint-staged": "^9.5.0",
+        "mime-types": "^2.1.26",
+        "onchange": "^6.1.0",
+        "prettier": "^1.19.1",
+        "readline-sync": "^1.4.10",
+        "serve": "^11.3.0",
+        "shelljs": "^0.8.3",
+        "source-map-support": "^0.5.16"
+    },
+    "dependencies": {
+        "@kentico/kontent-management": "^0.3.18",
+        "arg": "^5.0.0",
+        "chalk": "^4.1.0",
+        "esm": "^3.2.25",
+        "inquirer": "^8.0.0",
+        "rxjs": "^6.5.4"
+    }
+}
