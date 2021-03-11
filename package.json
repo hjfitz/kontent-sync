@@ -2,6 +2,8 @@
     "name": "kontent-sync",
     "description": "Kontent sync tool, syncing from one project to another",
     "main": "src/cli.js",
+    "version": "0.0.1",
+    "repository": "https://github.com/matthewcm/kontent-sync",
     "license": "ISC",
     "bin": {
         "kontent-sync": "bin/kontent-sync"
@@ -22,6 +24,5 @@
         "esm": "^3.2.25",
         "inquirer": "^8.0.0",
         "rxjs": "^6.5.4"
-    },
-    "version": "0.0.1"
+    }
 }
