@@ -5,6 +5,7 @@ import fs from "fs";
 export default async () => {
   const contentSnippets = await client.listContentTypeSnippets().toPromise();
 
+  console.log(contentSnippets.data.items.length , " snippets exported");
 
   fs.writeFileSync(
     `exports/snippets.json`,

@@ -9,7 +9,7 @@ import exportLocalisations from './migrations/exporting/exportLocalisations';
 import importContentTypes from './migrations/importing/importContentTypes';
 import importSnippets from './migrations/importing/importSnippets';
 import importTaxonomies from './migrations/importing/importTaxonomies';
-import exportAssets from './migrations/exporting/exportAssets';
+import exportAll from './migrations/exporting/exportAll';
 
 
 export default async (options) => {
@@ -20,30 +20,33 @@ export default async (options) => {
 
     switch(options.template) {
         case "export": {
-            for (const tool of options.tools) {
-                switch (tool) {
-                    case "types":
-                        console.log('%s ...', chalk.green.bold("Exporting content types"));
-                        await exportContentTypes()
-                        break
-                    case "assets":
-                        console.log('%s ...', chalk.green.bold("Exporting " + tool));
-                        await exportAssets()
-                        break
-                    case "localisations":
-                        console.log('%s ...', chalk.green.bold("Exporting localisations"));
-                        await exportLocalisations()
-                        break
-                    case "taxonomies":
-                        console.log('%s ...', chalk.green.bold("Exporting taxonomies"));
-                        await exportTaxonomies()
-                        break
-                    case "snippets":
-                        console.log('%s ...', chalk.green.bold("Exporting snippets"));
-                        await exportSnippets()
-                        break
-                }
-            }
+
+            console.log('%s ...', chalk.green.bold("Exporting all"));
+            await exportAll()
+            // for (const tool of options.tools) {
+            //     switch (tool) {
+            //         case "types":
+            //             console.log('%s ...', chalk.green.bold("Exporting content types"));
+            //             await exportContentTypes()
+            //             break
+            //         case "assets":
+            //             console.log('%s ...', chalk.green.bold("Exporting " + tool));
+            //             await exportAssets()
+            //             break
+            //         case "localisations":
+            //             console.log('%s ...', chalk.green.bold("Exporting localisations"));
+            //             await exportLocalisations()
+            //             break
+            //         case "taxonomies":
+            //             console.log('%s ...', chalk.green.bold("Exporting taxonomies"));
+            //             await exportTaxonomies()
+            //             break
+            //         case "snippets":
+            //             console.log('%s ...', chalk.green.bold("Exporting snippets"));
+            //             await exportSnippets()
+            //             break
+            //     }
+            // }
             break
         }
         case "import": {

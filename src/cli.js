@@ -2,6 +2,18 @@ import inquirer from 'inquirer';
 import { addProject, removeProject, listProjects, selectProjects } from './helpers/setupConfig';
 import kontentSync from './main'
 import chalk from 'chalk';
+import fs from 'fs';
+
+async function makeExportsDirectory(){
+    try {
+        // create new directory
+        fs.mkdirSync('exports', () => {
+            console.log("Directory is created.");
+        });
+
+    }catch{}
+
+}
 
 
 async function promptForSetup() {
@@ -120,76 +132,92 @@ async function promptForSelectProjects() {
     selectProjects(answers.import_project_name, answers.export_project_name)
 }
 
-async function promptForMissingOptions() {
+async function promptForTemplate() {
     const defaultTemplate = 'export';
 
     const questions = [];
 
-        questions.push({
-            type: 'list',
-            name: 'template',
-            message: 'Please choose.',
-            required: true,
-            choices: [
-                {
-                    value: "export",
-                    name:'Export from a Kontent project'
-                },
-                {
-                    value:"import",
-                    name:'Import to a kontent project'
-                },
-                {
-                    value:"sync",
-                    name:'Sync from EXPORT to IMPORT'
-                }
-            ],
+    questions.push({
+        type: 'list',
+        name: 'template',
+        message: 'Please choose.',
+        required: true,
+        choices: [
+            {
+                value: "export",
+                name: 'Export from a Kontent project'
+            },
+            {
+                value: "import",
+                name: 'Import to a kontent project'
+            },
+            {
+                value: "sync",
+                name: 'Sync from EXPORT to IMPORT'
+            }
+        ],
 
-            default: defaultTemplate,
-        });
-
-        questions.push({
-            type: 'checkbox',
-            name: 'tools',
-            message: 'Please choose.',
-            required:true,
-            choices: [
-                {
-                    value: "assets",
-                    name:'Assets'
-                },
-                {
-                    value:"types",
-                    name:'Content Types'
-                },
-                {
-                    value:"items",
-                    name:'Content Items'
-                },
-                {
-                    value:"localisations",
-                    name:'Localisations'
-                },
-                {
-                    value:"taxonomies",
-                    name:'Taxonomies'
-                },
-                {
-                    value:"snippets",
-                    name:'Snippets'
-                },
-            ],
-        });
-
+        default: defaultTemplate,
+    });
 
     const answers = await inquirer.prompt(questions);
+    let tools = []
+
+    if (answers.template === "import" || answers.template === "sync") {
+        tools = await promptForTools(answers.template)
+    }
+
     return {
         template:  answers.template,
-        tools:  answers.tools,
+        tools: tools,
     };
 }
 
+async function promptForTools(template) {
+    const questions = [];
+
+    questions.push({
+        type: 'checkbox',
+        name: 'tools',
+        message: 'Please choose.',
+        required: true,
+        choices: [
+            {
+                value: "assets",
+                name: 'Assets'
+            },
+            {
+                value: "types",
+                name: 'Content Types'
+            },
+            {
+                value: "items",
+                name: 'Content Items'
+            },
+            {
+                value: "localisations",
+                name: 'Localisations'
+            },
+            {
+                value: "taxonomies",
+                name: 'Taxonomies'
+            },
+            {
+                value: "snippets",
+                name: 'Snippets'
+            },
+        ],
+    });
+
+
+
+    const answers = await inquirer.prompt(questions);
+    return answers.tools
+}
+
 export async function cli() {
+    await makeExportsDirectory()
+
     await promptForSetup()
 
     try {
@@ -200,9 +228,9 @@ export async function cli() {
         return
     }
 
-    const options = await promptForMissingOptions();
+    const options = await promptForTemplate();
 
-    console.log(options);
+    // console.log(options);
 
     await kontentSync(options)
 }

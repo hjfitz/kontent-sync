@@ -2,6 +2,3 @@
 exports
 node_modules
 status.json
-
-# Project exclude paths
-/src/helpers/kontentClients.js
