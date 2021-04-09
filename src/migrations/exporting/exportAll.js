@@ -15,6 +15,7 @@ export default async () => {
 
     let buffer = await zipService.createZipAsync(data);
 
+
     await fs.writeFileSync('exports/all.zip', buffer)
 
 }

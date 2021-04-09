@@ -163,7 +163,7 @@ async function promptForTemplate() {
     const answers = await inquirer.prompt(questions);
     let tools = []
 
-    if (answers.template === "import" || answers.template === "sync") {
+    if (answers.template === "" || answers.template === "sync") {
         tools = await promptForTools(answers.template)
     }
 

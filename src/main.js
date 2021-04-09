@@ -10,6 +10,7 @@ import importContentTypes from './migrations/importing/importContentTypes';
 import importSnippets from './migrations/importing/importSnippets';
 import importTaxonomies from './migrations/importing/importTaxonomies';
 import exportAll from './migrations/exporting/exportAll';
+import importAll from './migrations/importing/importAll';
 
 
 export default async (options) => {
@@ -50,31 +51,33 @@ export default async (options) => {
             break
         }
         case "import": {
-            for (const tool of options.tools) {
-                switch (tool) {
-                    case "types":
-                        console.log('%s ...', chalk.green.bold("Importing content types" ));
-                        await importContentTypes()
-                        break
-                    case "assets":
-                        console.log('%s ...', chalk.green.bold("Importing " + tool));
-                        await importLocalisations()
-                        break
-                    case "localisations":
-                        console.log('%s ...', chalk.green.bold("Importing " + tool));
-                        await importLocalisations()
-                        break
-                    case "taxonomies":
-                        console.log('%s ...', chalk.green.bold("Importing" + tool));
-                        await importTaxonomies()
-                        break
-                    case "snippets":
-                        console.log('%s ...', chalk.green.bold("Importing " + tool));
-                        await importSnippets()
-                        break
-                }
-            }
-            break
+            console.log('%s ...', chalk.green.bold("Exporting all"));
+            await importAll()
+            // for (const tool of options.tools) {
+            //     switch (tool) {
+            //         case "types":
+            //             console.log('%s ...', chalk.green.bold("Importing content types" ));
+            //             await importContentTypes()
+            //             break
+            //         case "assets":
+            //             console.log('%s ...', chalk.green.bold("Importing " + tool));
+            //             await importLocalisations()
+            //             break
+            //         case "localisations":
+            //             console.log('%s ...', chalk.green.bold("Importing " + tool));
+            //             await importLocalisations()
+            //             break
+            //         case "taxonomies":
+            //             console.log('%s ...', chalk.green.bold("Importing" + tool));
+            //             await importTaxonomies()
+            //             break
+            //         case "snippets":
+            //             console.log('%s ...', chalk.green.bold("Importing " + tool));
+            //             await importSnippets()
+            //             break
+            //     }
+            // }
+            // break
         }
     }
 
